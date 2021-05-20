@@ -140,13 +140,15 @@
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -210,6 +212,16 @@ localhost:8081 --- Postgres GUI (pgadmin4)
 localhost:8082 --- OpenAPI Swagger Editor.
                    You can view ClairV4's public API here.
 
+localhost:8087 --- RabbitMQ management GUI
+                   Login:
+                     username: guest
+                     password: guest
+
+localhost:8161 --- ActiveMQ management GUI
+                   Login:
+                     username: admin
+                     password: admin
+
 localhost:7000 --- Traefik Web UI.
                    Good for troubleshooting http issues.
 
@@ -230,8 +242,7 @@ podman push --tls-verify=false localhost:8080/clairv4-org/testing:latest
 <h2 id="making-changes-to-configuration"><a class="header" href="#making-changes-to-configuration">Making changes to configuration</a></h2>
 <p>You may want to play with either Clair or Quay's configuration. 
 If so, the configuration files can be found inside the repository at
-<code>local-dev/quay/config.yaml</code> and <code>local-dev/clair.yaml</code>.</p>
-<p>Any changes to the configs will require a restart of the relevant service. Take a look at the <code>Makefile</code> for the various restart targets.</p>
+local-dev/quay/config.yaml<code>and</code>local-dev/clair/config.yaml<code>. Any changes to the configs will require a restart of the relevant service. Take a look at the </code>Makefile` for the various restart targets.</p>
 <h2 id="tearing-it-down"><a class="header" href="#tearing-it-down">Tearing it down</a></h2>
 <pre><code>make local-dev-down
 </code></pre>
