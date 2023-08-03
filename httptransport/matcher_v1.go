@@ -127,7 +127,7 @@ func (h *MatcherV1) vulnerabilityReport(w http.ResponseWriter, r *http.Request) 
 
 	vulnReport, err := h.srv.Scan(ctx, indexReport)
 	if err != nil {
-		apiError(ctx, w, http.StatusInternalServerError, "failed to start scan: %v", err)
+		apiError(ctx, w, http.StatusInternalServerError, "failed to create vulnerability report: %v", err)
 		return
 	}
 
