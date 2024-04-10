@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="Documentation for Clair.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
@@ -31,7 +31,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -61,31 +61,38 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="../whatis.html"><strong aria-hidden="true">1.</strong> What is ClairV4</a></li><li class="chapter-item expanded "><a href="../howto.html"><strong aria-hidden="true">2.</strong> How Tos</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../howto/getting_started.html" class="active"><strong aria-hidden="true">2.1.</strong> Getting Started With ClairV4</a></li><li class="chapter-item expanded "><a href="../howto/deployment.html"><strong aria-hidden="true">2.2.</strong> Deployment Models</a></li><li class="chapter-item expanded "><a href="../howto/api.html"><strong aria-hidden="true">2.3.</strong> API Definition</a></li><li class="chapter-item expanded "><a href="../howto/testing.html"><strong aria-hidden="true">2.4.</strong> Testing ClairV4</a></li></ol></li><li class="chapter-item expanded "><a href="../concepts.html"><strong aria-hidden="true">3.</strong> Concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../concepts/indexing.html"><strong aria-hidden="true">3.1.</strong> Indexing</a></li><li class="chapter-item expanded "><a href="../concepts/matching.html"><strong aria-hidden="true">3.2.</strong> Matching</a></li><li class="chapter-item expanded "><a href="../concepts/api_internal.html"><strong aria-hidden="true">3.3.</strong> Internal API</a></li><li class="chapter-item expanded "><a href="../concepts/authentication.html"><strong aria-hidden="true">3.4.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="../concepts/notifications.html"><strong aria-hidden="true">3.5.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../concepts/updatersandairgap.html"><strong aria-hidden="true">3.6.</strong> Updaters and Airgap</a></li><li class="chapter-item expanded "><a href="../concepts/operation.html"><strong aria-hidden="true">3.7.</strong> Operation</a></li></ol></li><li class="chapter-item expanded "><a href="../contribution.html"><strong aria-hidden="true">4.</strong> Contribution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../contribution/releases.html"><strong aria-hidden="true">4.1.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../contribution/commit_style.html"><strong aria-hidden="true">4.2.</strong> Commit Style</a></li></ol></li><li class="chapter-item expanded "><a href="../reference.html"><strong aria-hidden="true">5.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../reference/api.html"><strong aria-hidden="true">5.1.</strong> Api</a></li><li class="chapter-item expanded "><a href="../reference/clairctl.html"><strong aria-hidden="true">5.2.</strong> Clairctl</a></li><li class="chapter-item expanded "><a href="../reference/config.html"><strong aria-hidden="true">5.3.</strong> Config</a></li><li class="chapter-item expanded "><a href="../reference/indexer.html"><strong aria-hidden="true">5.4.</strong> Indexer</a></li><li class="chapter-item expanded "><a href="../reference/matcher.html"><strong aria-hidden="true">5.5.</strong> Matcher</a></li><li class="chapter-item expanded "><a href="../reference/notifier.html"><strong aria-hidden="true">5.6.</strong> Notifier</a></li><li class="chapter-item expanded "><a href="../reference/metrics.html"><strong aria-hidden="true">5.7.</strong> Metrics</a></li></ol></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -116,9 +123,9 @@
                                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -182,17 +189,17 @@ and version tags are built from the corresponding release.</p>
 <p>The easiest way to get Clair up and running for test purposes is to use our <a href="./testing.html">local dev environment</a></p>
 <p>If you're the hands on type who wants to get into the details however, continue reading.</p>
 <h2 id="modes"><a class="header" href="#modes">Modes</a></h2>
-<p>Clair can run in several modes. <a href="../reference/indexer.html">Indexer</a>, <a href="../reference/matcher.html">matcher</a>, <a href="../reference/notifier.html">notifier</a> or combo mode. In combo mode, everything runs in a single OS process. </p>
-<p>If you are just starting with Clair you will most likely want to start with combo mode and venture out to a distributed deployment once acquainted. </p>
+<p>Clair can run in several modes. <a href="../reference/indexer.html">Indexer</a>, <a href="../reference/matcher.html">matcher</a>, <a href="../reference/notifier.html">notifier</a> or combo mode. In combo mode, everything runs in a single OS process.</p>
+<p>If you are just starting with Clair you will most likely want to start with combo mode and venture out to a distributed deployment once acquainted.</p>
 <p>This how-to will demonstrate combo mode and introduce some further reading on a distributed deployment.</p>
 <h2 id="postgres"><a class="header" href="#postgres">Postgres</a></h2>
 <p>Clair uses PostgreSQL for its data persistence. Migrations are supported so you should only need to point Clair to a fresh database and have it do the setup for you.</p>
 <p>We will assume you have setup a postgres database and it's reachable with the following connection string:
-<code>host=clair-db port=5432 user=clair dbname=clair sslmode=disable</code>. Adjust for your environment accordingly. </p>
+<code>host=clair-db port=5432 user=clair dbname=clair sslmode=disable</code>. Adjust for your environment accordingly.</p>
 <h2 id="starting-clair-in-combo-mode"><a class="header" href="#starting-clair-in-combo-mode">Starting Clair In Combo Mode</a></h2>
-<p>At this point, you should either have built Clair from source or have pulled the container. In either case, we will assume that the <code>clair-db</code> hostname will resolve to your postgres database. </p>
+<p>At this point, you should either have built Clair from source or have pulled the container. In either case, we will assume that the <code>clair-db</code> hostname will resolve to your postgres database.</p>
 <p><em>You may need to configure <a href="https://docs.docker.com/network/">docker</a> or <a href="https://podman.io/getting-started/network.html">podman</a> networking if you are utilizing containers. This is out of scope for this how-to.</em></p>
-<p>A basic config for combo mode can be found <a href="https://github.com/quay/clair/blob/main/config.yaml.sample">here</a>. Make sure to edit this config with your database settings and set &quot;migrations&quot; to <code>true</code> for all mode stanzas. In this basic combo mode, all &quot;connstring&quot; fields should point to the same database and any *_addr fields are simply ignored. For more details see the <a href="../reference/config.html">config reference</a> and <a href="./deployment.html">deployment models</a></p>
+<p>A basic config for combo mode can be found <a href="https://github.com/quay/clair/blob/main/config.yaml.sample">here</a>. Make sure to edit this config with your database settings and set "migrations" to <code>true</code> for all mode stanzas. In this basic combo mode, all "connstring" fields should point to the same database and any *_addr fields are simply ignored. For more details see the <a href="../reference/config.html">config reference</a> and <a href="./deployment.html">deployment models</a></p>
 <p>Clair has 3 requirements to start:</p>
 <ul>
 <li>The <code>mode</code> flag or <code>CLAIR_MODE</code> environment variable specifying what mode this instance will run in.</li>
@@ -204,17 +211,20 @@ and version tags are built from the corresponding release.</p>
 CLAIR_CONF=/path/to/mounted/config.yaml
 </code></pre>
 <p>If you are running a Clair binary directly, its likely easiest to use the command line.</p>
-<pre><code>clair -conf &quot;path/to/config.yaml&quot; -mode &quot;combo&quot;
+<pre><code>clair -conf "path/to/config.yaml" -mode "combo"
 </code></pre>
 <h2 id="submitting-a-manifest"><a class="header" href="#submitting-a-manifest">Submitting A Manifest</a></h2>
-<p>The simplest way to submit a manifest to your running Clair is utilizing <a href="../reference/clairctl.html">clairctl</a>. This is a CLI tool capable of grabbing image manifests from public repositories and and submitting them for analysis. 
+<p>The simplest way to submit a manifest to your running Clair is utilizing <a href="../reference/clairctl.html">clairctl</a>. This is a CLI tool capable of grabbing image manifests from public repositories and submitting them for analysis.
 The command will be in the Clair container, but can also be installed locally by running the following command:</p>
 <pre><code>go install github.com/quay/clair/v4/cmd/clairctl@latest
 </code></pre>
 <p>You can submit a manifest to ClairV4 via the following command.</p>
 <pre><code class="language-shell">$ clairctl report --host ${net_address_of_clair} ${image_tag}
 </code></pre>
-<p>By default, <code>clairctl</code> will look for Clair at <code>localhost:6060</code>.</p>
+<p>You will need to add the <code>config</code> flag if you are using a PSK authentication (as in the <a href="./testing.html">local dev environment</a> setup, for example).</p>
+<pre><code class="language-shell">$ clairctl report --config local-dev/clair/config.yaml --host ${net_address_of_clair} ${image_tag}
+</code></pre>
+<p>By default, <code>clairctl</code> will look for Clair at <code>localhost:6060</code> or the environment variable <code>CLAIR_API</code>, and for a configuration at <code>config.yaml</code> or the environment variable <code>CLAIR_CONF</code>.</p>
 <p>If everything is configured correctly, you should see some output like the following informing you of vulnerabilities affecting the supplied image.</p>
 <pre><code class="language-shell">$ clairctl report ubuntu:focal
 ubuntu:focal found bash        5.0-6ubuntu1.1         CVE-2019-18276
@@ -243,6 +253,9 @@ ubuntu:focal found libc6       2.31-0ubuntu9          CVE-2016-10228
 ubuntu:focal found libc6       2.31-0ubuntu9          CVE-2020-6096
 ubuntu:focal found libgcrypt20 1.8.5-5ubuntu1         CVE-2019-12904
 </code></pre>
+<p>To test locally-built images, you'll need to push them to a registry that is accessible by the Clair service and the <code>clairctl</code> command.
+A local registry can be used for this, but the specifics of configuration vary by registry and container runtime.
+Consult the relevant documentation for more information.</p>
 <h2 id="whats-next"><a class="header" href="#whats-next">What's Next</a></h2>
 <p>Now that you see the basic usage of Clair, you can checkout our <a href="./deployment.html">deployment models</a> to learn different ways of deploying.</p>
 <p>You may also be curious about how <code>clairctl</code> did that work. Check out our <a href="./api.html">API definition</a> to understand how an application interacts with Clair.</p>
@@ -255,7 +268,7 @@ ubuntu:focal found libgcrypt20 1.8.5-5ubuntu1         CVE-2019-12904
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../howto/deployment.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../howto/deployment.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -269,7 +282,7 @@ ubuntu:focal found libgcrypt20 1.8.5-5ubuntu1         CVE-2019-12904
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../howto/deployment.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../howto/deployment.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
